@@ -1,38 +1,40 @@
-.App {
-  text-align: center;
+.nav-link:link {
+  color: white !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.nav-link:hover,
+.nav-link:active {
+  color: lightblue !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.bg-purple {
+  background-color: darkblue;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.background {
+  background-image: url('./images/background.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: darkblue;
+  color: navy;
+  background-attachment: fixed;
+  height: calc(100vh - 56px);
+  height: -moz-calc(100vh - 56px);
+  height: -webkit-calc(100vh - 56px);
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.background-opacity {
+  background: rgba(255, 255, 255, 0.4);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-attachment: fixed;
+  height: calc(100vh - 56px);
+  height: -moz-calc(100vh - 56px);
+  height: -webkit-calc(100vh - 56px);
 }
