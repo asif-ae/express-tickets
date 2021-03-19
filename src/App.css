@@ -14,17 +14,15 @@
 .background {
   background-image: url('./images/background.jpg');
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   background-color: darkblue;
   color: navy;
+  min-height: 100vh;
   background-attachment: fixed;
-  height: calc(100vh - 56px);
-  height: -moz-calc(100vh - 56px);
-  height: -webkit-calc(100vh - 56px);
 }
 
 .background-opacity {
@@ -33,8 +31,90 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  min-height: 100vh;
   background-attachment: fixed;
-  height: calc(100vh - 56px);
-  height: -moz-calc(100vh - 56px);
-  height: -webkit-calc(100vh - 56px);
+}
+
+.single-card {
+  padding: 10px;
+  margin: 10px auto;
+  border-radius: 10px;
+}
+
+.card-image {
+  width: 100px;
+}
+
+.btn-card {
+  background-color: blue !important;
+}
+
+.btn-card:hover {
+  background-color: darkblue !important;
+}
+
+.btn-submit {
+  background-color: blue !important;
+  width: 100%;
+}
+.btn-submit:hover {
+  background-color: darkblue !important;
+}
+
+.input {
+  border: none;
+  width: 100%;
+  border-bottom: 1px solid darkblue;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.div-input {
+  padding: 10px;
+}
+
+.form-checkbox {
+  padding: 10px !important;
+  cursor: pointer;
+}
+
+.text-size {
+  font-size: 18px;
+}
+
+.icon-style {
+  font-size: 24px;
+  width: 36px;
+  color: white;
+  text-align: center;
+}
+
+.twitter-box {
+  cursor: pointer;
+  border: 1px solid #00ACEE;
+  background-color: white;
+}
+
+.twitter-icon {
+  background-color: #00ACEE;
+}
+
+.twitter-text {
+  color: #00ACEE;
+}
+
+.github-box {
+  cursor: pointer;
+  border: 1px solid #24292e;
+  background-color: white;
+}
+
+.github-icon {
+  background-color: #24292e;
+}
+
+.github-text {
+  color: #24292e;
 }

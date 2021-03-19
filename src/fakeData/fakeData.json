@@ -1,21 +1,21 @@
 [{
   "id": 1,
-  "class": "One time ticket",
+  "type": "one time pass",
   "image": "https://drive.google.com/uc?id=18IcYPpS-lFUVokp0O2wGC4a3UELe_CNK",
   "price": "100"
 }, {
   "id": 2,
-  "class": "One day pass",
+  "type": "one day pass",
   "image": "https://drive.google.com/uc?id=1-A6uzZlRHByw-tH5Cvh9RaWTFWb7fDtZ",
   "price": "500"
 }, {
   "id": 3,
-  "class": "Monthly pass",
+  "type": "monthly pass",
   "image": "https://drive.google.com/uc?id=1MfjFJCsEHM36Je9X5ZvYvm7etIKQ1o_P",
   "price": "1500"
 }, {
   "id": 4,
-  "class": "Annual pass",
+  "type": "Annual pass",
   "image": "https://drive.google.com/uc?id=1kGhLdep3Lkd7L3O5aM74t-lNp9nscYL6",
   "price": "9000"
 }]

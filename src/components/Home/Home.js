@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
+import fakeData from '../../fakeData/fakeData.json';
+import Card from '../Card/Card';
 
 const Home = () => {
   return (
     <div className="background">
       <div className="background-opacity d-flex align-items-center">
         <div className="container">
-          <h1 className="card-d">I am home</h1>
+          <div className="row">
+            {
+              fakeData.map(data => <Card data={data} key={data.id}></Card>)
+            }
+          </div>
         </div>
       </div>
     </div>
