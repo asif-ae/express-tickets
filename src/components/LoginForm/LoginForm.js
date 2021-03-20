@@ -22,9 +22,10 @@ const LoginForm = () => {
     displayName: '',
     email: '',
     password: '',
-    error: ''
+    error: '',
+    success: false
   });
-  const {displayName, email, password} = user;
+  const {displayName, email, password, error, success} = user;
   console.log(user);
 
   let passwordValue;
@@ -42,17 +43,14 @@ const LoginForm = () => {
     let isFieldValid;
     
     if (nameChecker) {
-      console.log(getValue);
       isFieldValid = true;
     }
     if (emailChecker) {
       const emailValidator = /\S+@\S+\.\S+/.test(getValue);
-      emailValidator && console.log(getValue);
       isFieldValid = emailValidator;
     }
     if (passwordChecker || cPasswordChecker) {
       const passwordValidator = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(getValue);
-      passwordValidator && console.log(getValue);
       
       if (!newUser && passwordChecker) {
         isFieldValid = true
@@ -64,7 +62,6 @@ const LoginForm = () => {
           cPasswordValue = getValue;
         }
         let matchPassword = passwordValue === cPasswordValue;
-        console.log(cPasswordValue, passwordValue, matchPassword);
         isFieldValid = passwordValidator && matchPassword;
       }
     }
@@ -80,20 +77,19 @@ const LoginForm = () => {
       .then((userCredential) => {
         const newUserInfo = {...user};
         newUserInfo.error = '';
-        setUser(newUserInfo);
         newUserInfo.isSignIn = true;
+        newUserInfo.success = true;
         setUser(newUserInfo);
         // Signed in
         const users = userCredential.user;
         updateUserInfo(displayName);
-        console.log(users);
       })
       .catch((error) => {
         const newUserInfo = {...user};
         const errorMessage = error.message;
+        newUserInfo.success = false;
         newUserInfo.error = errorMessage;
         setUser(newUserInfo);
-        console.log(errorMessage);
       });
     }
 
@@ -102,15 +98,16 @@ const LoginForm = () => {
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        console.log(user);
         const {displayName} = user;
         const signedInUser = {name: displayName};
         setLoggedInUser(signedInUser);
         history.replace(from);
       })
       .catch((error) => {
+        const newUserInfo = {...user};
         const errorMessage = error.message;
-        console.log(errorMessage);
+        newUserInfo.error = errorMessage;
+        setUser(newUserInfo);
       });
     }
     event.preventDefault();
@@ -122,8 +119,6 @@ const LoginForm = () => {
 
     user.updateProfile({
       displayName: displayName
-    }).then(function() {
-      console.log('Username Update successfully')
     }).catch(function(error) {
       console.log(error)
     });
@@ -133,23 +128,26 @@ const LoginForm = () => {
   const newUserToggler = (newUser) ?
     <p>Already have an account? <span className="new-user-toggler" onClick={() => setNewUser(!newUser)}>Login</span></p> :
     <p>Don't have an account? <span className="new-user-toggler" onClick={() => setNewUser(!newUser)}>Create an account</span></p>;
+
+  // Output Codes
   return (
     <div className="m-3 border rounded">
       <form className="p-5" onSubmit={handleSubmit}>
         <div className="div-input"><h3>{handleLoginText}</h3></div>
+        <p className="text-center text-danger">{error}</p>
+        { success && <p className="text-center text-success">User created successfully!</p>}
         {
           newUser &&  <div className="div-input">
                         <input className="input" type="text" name="displayName" id="displayName" placeholder="Name" onChange={handleChange} required/>
-                        <p>{displayName}</p>
                       </div>
         }
         <div className="div-input">
           <input className="input" type="text" name="email" id="email" placeholder="Email" onChange={handleChange} required/>
-          <p>{email}</p>
+          <p className="text-success">Your Email is valid</p>
         </div>
         <div className="div-input">
           <input className="input" type="password" name="password" id="password" placeholder="Password" onChange={handleChange} required/>
-          <p>{password}</p>
+          <p className="text-success">Your Password is valid</p>
         </div>
         {
           newUser &&  <>
