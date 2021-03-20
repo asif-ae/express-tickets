@@ -12,9 +12,9 @@ const Header = () => {
       <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end px-3">
         <Nav className="text-right">
           <div className="px-1"><Link to="/" className="nav-link text-white">Home</Link></div>
-          <div className="px-1"><Link to="/destination" className="nav-link text-white">Destination</Link></div>
+          <div className="px-1"><Link to="/destination/1" className="nav-link text-white">Destination</Link></div>
           {
-            loggedInUser.name ? <div className="px-1 text-white my-auto"><div>{loggedInUser.name}</div></div> :
+            loggedInUser.name ? <div className="px-1 text-white my-auto"><div><b>{loggedInUser.name}</b></div></div> :
             <div className="px-1"><Link to="/login"><Button variant="success">Login</Button></Link></div>
           }
         </Nav>

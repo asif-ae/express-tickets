@@ -1,5 +1,6 @@
 import { Button } from 'react-bootstrap';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Card = (props) => {
   const {id, type, image, price} = props.data;
@@ -9,7 +10,7 @@ const Card = (props) => {
         <h3>{type}</h3>
           <img src={image} alt={type} className="card-image"/>
         <h5>${price}</h5>
-        <Button className="btn-card">BUY NOW</Button>
+        <Link to={`/destination/${id}`}><Button className="btn-card">BUY NOW</Button></Link>
       </div>
     </div>
   );

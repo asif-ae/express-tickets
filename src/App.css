@@ -127,3 +127,36 @@
 .new-user-toggler:hover {
   color: darkblue;
 }
+
+.to-uppercase {
+  text-transform: uppercase;
+}
+
+.ticket-price {
+  background-color: lightgray;
+  border-radius: 15px;
+}
+
+.choosed-destination {
+  background-color: blue;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.choose-ticket {
+  background-color: white;
+  color: blue;
+  border-radius: 15px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.ticket-image {
+  width: 50px;
+  display: inline;
+}
+
+#map {
+  padding: 20px;
+}

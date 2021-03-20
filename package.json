@@ -12,9 +12,13 @@
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^4.6.0",
     "firebase": "^8.3.1",
+    "leaflet": "^1.7.1",
+    "mapbox-gl": "^2.1.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
+    "react-calendar": "^3.3.1",
     "react-dom": "^17.0.1",
+    "react-leaflet": "^3.1.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.1"
