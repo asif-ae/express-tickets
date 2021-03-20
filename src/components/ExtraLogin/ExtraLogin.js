@@ -19,10 +19,9 @@ const ExtraLogin = () => {
   const { from } = location.state || { from: { pathname: "/" } };
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
   const [errors, setErrors] = useState({
-    error: '',
-    success: false
+    error: ''
   });
-  const {error, success} = errors;
+  const {error} = errors;
 
   const handleGithubSignIn = () => {
     const githubProvider = new firebase.auth.GithubAuthProvider();
@@ -32,7 +31,6 @@ const ExtraLogin = () => {
     .signInWithPopup(githubProvider)
     .then((result) => {
       const user = result.user;
-      console.log(user);
       const {displayName} = user;
       const signedInUser = {name: displayName};
       setLoggedInUser(signedInUser);
@@ -42,7 +40,6 @@ const ExtraLogin = () => {
       const newUserInfo = {...errors};
       newUserInfo.error = errorMessage;
       setErrors(newUserInfo);
-      console.log(errorMessage);
     });
   }
   const handleTwitterSignIn = () => {
@@ -53,7 +50,6 @@ const ExtraLogin = () => {
     .signInWithPopup(twitterProvider)
     .then((result) => {
       const user = result.user;
-      console.log(user)
       const {displayName} = user;
       const signedInUser = {name: displayName};
       setLoggedInUser(signedInUser);
@@ -63,7 +59,6 @@ const ExtraLogin = () => {
       const newUserInfo = {...errors};
       newUserInfo.error = errorMessage;
       setErrors(newUserInfo);
-      console.log(errorMessage)
     });
   }
 
