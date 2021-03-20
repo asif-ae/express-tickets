@@ -30,7 +30,7 @@
     "eject": "react-scripts eject"
   },
   "hosting": {
-    "public": "dist"
+    "public": "public"
   },
   "eslintConfig": {
     "extends": [
