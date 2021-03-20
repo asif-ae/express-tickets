@@ -26,7 +26,6 @@ const LoginForm = () => {
     success: false
   });
   const {displayName, email, password, error, success} = user;
-  console.log(user);
 
   let passwordValue;
   let cPasswordValue;
