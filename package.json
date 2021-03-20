@@ -29,18 +29,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "hosting": {
-    "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [ {
-      "source": "/",
-      "destination": "/index.html"
-    } ]
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
