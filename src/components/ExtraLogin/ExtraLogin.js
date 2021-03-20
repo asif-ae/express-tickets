@@ -1,9 +1,11 @@
 import { faGithub, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
+import React, { useContext } from 'react';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from '../Login/firebase.config'
+import { UserContext } from '../../App';
+import { useHistory, useLocation } from 'react-router';
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -12,6 +14,11 @@ if (!firebase.apps.length) {
 }
 
 const ExtraLogin = () => {
+  const history = useHistory();
+  const location = useLocation();
+  const { from } = location.state || { from: { pathname: "/" } };
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
   const handleGithubSignIn = () => {
     const githubProvider = new firebase.auth.GithubAuthProvider();
 
@@ -28,6 +35,10 @@ const ExtraLogin = () => {
       // The signed-in user info.
       const user = result.user;
       console.log(user);
+      const {displayName} = user;
+      const signedInUser = {name: displayName};
+      setLoggedInUser(signedInUser);
+      history.replace(from);
     }).catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;
@@ -57,6 +68,10 @@ const ExtraLogin = () => {
       // The signed-in user info.
       const user = result.user;
       console.log(user)
+      const {displayName} = user;
+      const signedInUser = {name: displayName};
+      setLoggedInUser(signedInUser);
+      history.replace(from);
     }).catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;

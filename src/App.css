@@ -118,3 +118,12 @@
 .github-text {
   color: #24292e;
 }
+
+.new-user-toggler {
+  color: blue;
+  cursor: pointer;
+}
+
+.new-user-toggler:hover {
+  color: darkblue;
+}

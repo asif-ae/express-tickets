@@ -6,13 +6,13 @@ const Destination = () => {
       <div className="row">
         <div className="col-md-4 my-3">
           <div className="choose-destination bg-light p-3 rounded">
-            <div class="mb-3">
+            <div className="mb-3">
               <small>Pick From</small>
-              <input class="form-control" type="text" placeholder="Dhaka"/>
+              <input className="form-control" type="text" placeholder="Dhaka"/>
             </div>
-            <div class="mb-0">
+            <div className="mb-0">
               <small>Pick To</small>
-              <input class="form-control" type="text" placeholder="Syhlet"/>
+              <input className="form-control" type="text" placeholder="Syhlet"/>
             </div>
           </div>
 

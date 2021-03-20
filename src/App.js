@@ -6,19 +6,25 @@ import Header from './components/Header/Header';
 import Destination from './components/Destination/Destination';
 import NotFound from './components/NotFound/NotFound';
 import Login from './components/Login/Login';
+import React, { createContext, useState } from 'react';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+
+export const UserContext = createContext();
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState({});
   return (
-    <>
+    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
+        <p>Name: {loggedInUser.name}</p>
         <Header></Header>
         <Switch>
           <Route exact path="/">
             <Home></Home>
           </Route>
-          <Route path="/destination">
+          <PrivateRoute path="/destination">
             <Destination></Destination>
-          </Route>
+          </PrivateRoute>
           <Route path="/login">
             <Login></Login>
           </Route>
@@ -27,7 +33,7 @@ function App() {
           </Route>
         </Switch>
       </Router>
-    </>
+    </UserContext.Provider>
   );
 }
 
