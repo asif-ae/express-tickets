@@ -29,6 +29,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "hosting": {
+    "rewrites": [ {
+      "source": "**",
+      "destination": "/index.html"
+     } ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
