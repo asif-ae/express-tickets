@@ -20,19 +20,20 @@ const ExtraLogin = () => {
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
 
+  // Getting data from parent component
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
   // Update Error Message
   const [errors, setErrors] = useState({
     error: ''
   });
-  // Destructuring UseState
+  // Destructuring from UseState
   const {error} = errors;
 
   const handleGithubSignIn = () => {
     const githubProvider = new firebase.auth.GithubAuthProvider();
 
-    // Fetching data
+    // Created a function for simplicity
     firebaseAuth(githubProvider);
   }
   const handleTwitterSignIn = () => {
@@ -80,11 +81,14 @@ const ExtraLogin = () => {
 
   return (
     <div>
+      {/* Show error messages */}
       <p className="text-center text-danger">{error}</p>
+
       {/* For Twitter */}
       {
         displayAuthBoxes("twitter-box", handleTwitterSignIn, "twitter-icon", faTwitter, "twitter-text", "Twitter")
       }
+
       {/* For Github */}
       {
         displayAuthBoxes("github-box", handleGithubSignIn, "github-icon", faGithub, "github-text", "Github")

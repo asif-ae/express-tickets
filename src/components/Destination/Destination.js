@@ -1,4 +1,3 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import React from 'react';
 import { useState } from 'react';
 import { useParams } from 'react-router';
@@ -7,14 +6,18 @@ import ticket2 from "../../fakeData/2.json";
 import ticket3 from "../../fakeData/3.json";
 import ticket4 from "../../fakeData/4.json";
 import ticket from '../../images/ticket.png';
-import '../../mapbox-gl.css';
 import 'react-calendar/dist/Calendar.css';
 import Calendar from 'react-calendar';
+import MapDivision from '../MapDivision/MapDivision';
 
-let url;
 
 const Destination = () => {
+  // Get URL parameters
   const { ticketId } = useParams();
+  
+  // The URL
+  let url;
+  // Setting JSON data URL(s)
   if (ticketId === "1") {
     url = ticket1;
   }
@@ -27,9 +30,10 @@ const Destination = () => {
   if (ticketId === "4") {
     url = ticket4;
   }
-  const {id, image, price, type} = url[0];
-  console.log(id, image, price, type);
+  // Data destructuring from JSON data
+  const {type} = url[0];
 
+  // This function for ticket price division
   const priceDiv = () => {
     return (
       <div className="choose-ticket px-3 mb-3 py-2">
@@ -44,13 +48,18 @@ const Destination = () => {
     )
   }
 
+  // This state is define is the person clicked on confirm button or not
   const [isConfirm, setIsConfirm] = useState(false);
+
+  // This state is for Calender
   const [value, onChange] = useState(new Date(Date()));
 
   return (
     <div className="container">
       <div className="row">
         <div className="col-md-4 my-3">
+
+          {/* If the user just comming from home, The user will see this for choosing destination and date. */}
           {
             !isConfirm && (
               <div className="choose-destination bg-light p-3 rounded">
@@ -75,6 +84,7 @@ const Destination = () => {
             )
           }
 
+          {/* When the user choosed destination point. Then this pice of code will be executed. */}
           {
             isConfirm && (
               <div className="ticket-price p-3 rounded">
@@ -84,34 +94,20 @@ const Destination = () => {
                     <li className="to-destination">Syhlet</li>
                   </ul>
                 </div>
+
+                {/* Ticket Price */}
                 {priceDiv()}
                 {priceDiv()}
                 {priceDiv()}
+                
               </div>
             )
           }
         </div>
+
+        {/* The Map is here */}
         <div className="col-md-8">
-          <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
-          <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-          <div id="map">
-            <MapContainer
-              center={[ 23.81065, 90.41171 ]}
-              zoom={10}
-              scrollWheelZoom={false}
-              style={{ height: "300px", width: "100%" }}
-            >
-              <TileLayer
-                url="https://api.mapbox.com/styles/v1/asiftushar/ckmhpynub35bd17oiavujm19a/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYXNpZnR1c2hhciIsImEiOiJja21ob2swanUwNTc0MnBvNzdpaGlodWxoIn0.JLzTBTDXx7du465cImbCug"
-                attribution="&copy; <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> &copy; <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>"
-              />
-              <Marker position={[ 23.81065, 90.41171 ]}>
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker>
-            </MapContainer>
-          </div>
+          <MapDivision></MapDivision>
         </div>
       </div>
     </div>
