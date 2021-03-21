@@ -13,11 +13,19 @@ if (!firebase.apps.length) {
 }
 
 const LoginForm = () => {
+  // Use History Hook
   const history = useHistory();
+  // Use Location Hook
   const location = useLocation();
   const { from } = location.state || { from: { pathname: "/" } };
+
+  // Getting data from parent component
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+
+  // This state is define is the person a new user or not
   const [newUser, setNewUser] = useState(false);
+
+  // This useState stored users data
   const [user, setUser] = useState({
     displayName: '',
     email: '',
@@ -25,30 +33,43 @@ const LoginForm = () => {
     error: '',
     success: false
   });
+  // Destructuring from user useState
   const {displayName, email, password, error, success} = user;
 
+  // Get the Main Password value
   let passwordValue;
-  let cPasswordValue;
+  // Get the Confirm Password value
+  let confirmPasswordValue;
   
+  // This function is created for checking form value on change
   const handleChange = (e) => {
+    // Collecting form information
     const getValue = e.target.value;
     const getName = e.target.name;
     const getId = e.target.id;
+
+    // Check the information collected from the form
     const nameChecker = getId === "displayName";
     const emailChecker = getId === "email";
     const passwordChecker = getId === "password";
-    const cPasswordChecker = getId === "confirmPassword";
+    const confirmPasswordChecker = getId === "confirmPassword";
 
+    // Created a variable for checking the field is valid or not
     let isFieldValid;
     
+    // Check the name is valid or not
     if (nameChecker) {
       isFieldValid = true;
     }
+
+    // Check the email is valid or not
     if (emailChecker) {
       const emailValidator = /\S+@\S+\.\S+/.test(getValue);
       isFieldValid = emailValidator;
     }
-    if (passwordChecker || cPasswordChecker) {
+
+    // Check the password and the confirm password is valid or not
+    if (passwordChecker || confirmPasswordChecker) {
       const passwordValidator = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(getValue);
       
       if (!newUser && passwordChecker) {
@@ -57,31 +78,35 @@ const LoginForm = () => {
         if (passwordChecker) {
           passwordValue = getValue;
         }
-        if (cPasswordChecker) {
-          cPasswordValue = getValue;
+        if (confirmPasswordChecker) {
+          confirmPasswordValue = getValue;
         }
-        let matchPassword = passwordValue === cPasswordValue;
+        let matchPassword = passwordValue === confirmPasswordValue;
         isFieldValid = passwordValidator && matchPassword;
       }
     }
+
+    // Created a condition for checking the field is valid or not
     if (isFieldValid) {
       const newUserInfo = {...user};
       newUserInfo[getName] = getValue;
       setUser(newUserInfo);
     }
   }
+
+  // This function is created for the form submit button
   const handleSubmit = (event) => {
+    // This condition is created for register a new user
     if (newUser && displayName && email && password) {
       firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((userCredential) => {
+      .then(() => {
         const newUserInfo = {...user};
         newUserInfo.error = '';
         newUserInfo.isSignIn = true;
         newUserInfo.success = true;
         setUser(newUserInfo);
-        // Signed in
-        const users = userCredential.user;
-        updateUserInfo(displayName);
+        // This will update user information
+        updateUserInfo();
       })
       .catch((error) => {
         const newUserInfo = {...user};
@@ -92,6 +117,7 @@ const LoginForm = () => {
       });
     }
 
+    // This condition is created for login a user
     if (!newUser && email && password) {
       firebase.auth().signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
@@ -109,11 +135,12 @@ const LoginForm = () => {
         setUser(newUserInfo);
       });
     }
+    // This event is block auto reload on submit
     event.preventDefault();
   }
 
-  // Update User Name
-  const updateUserInfo = (userInfo) => {
+  // This function will update the name of a user when the user creating a new account
+  const updateUserInfo = () => {
     const user = firebase.auth().currentUser;
 
     user.updateProfile({
@@ -123,7 +150,9 @@ const LoginForm = () => {
     });
   }
 
+  // Handle login text
   const handleLoginText = (newUser) ? "Register" : "Login";
+  // Handle toggler
   const newUserToggler = (newUser) ?
     <p>Already have an account? <span className="new-user-toggler" onClick={() => setNewUser(!newUser)}>Login</span></p> :
     <p>Don't have an account? <span className="new-user-toggler" onClick={() => setNewUser(!newUser)}>Create an account</span></p>;
@@ -134,7 +163,7 @@ const LoginForm = () => {
       <form className="p-5" onSubmit={handleSubmit}>
         <div className="div-input"><h3>{handleLoginText}</h3></div>
         <p className="text-center text-danger">{error}</p>
-        { success && <p className="text-center text-success">User created successfully!</p>}
+        { success && <p className="text-center text-success">User created successfully!</p> }
         {
           newUser &&  <div className="div-input">
                         <input className="input" type="text" name="displayName" id="displayName" placeholder="Name" onChange={handleChange} required/>
