@@ -34,13 +34,13 @@ const Destination = () => {
   const {type} = url[0];
 
   // This function for ticket price division
-  const priceDiv = () => {
+  const priceDiv = (ticketNumber) => {
     return (
       <div className="choose-ticket px-3 mb-3 py-2">
         <div className="d-flex align-items-center w-100">
           <img src={ticket} className="ticket-image pr-2" alt="Ticket"/>
           <div className="d-flex w-100 justify-content-between">
-            <div className="part-1">Ticket-1</div>
+            <div className="part-1">Ticket-{ticketNumber}</div>
             <div className="part-2 d-flex justify-content-end">$67</div>
           </div>
         </div>
@@ -53,6 +53,34 @@ const Destination = () => {
 
   // This state is for Calender
   const [value, onChange] = useState(new Date(Date()));
+
+  // Store Destination Value
+  const [destination, setDestination] = useState({
+    fromDestination: '',
+    toDestination: ''
+  });
+  const {fromDestination, toDestination} = destination;
+
+  // Get Destination Value
+  const handleChangeValue = (e) => {
+    const getValue = e.target.value;
+    const getName = e.target.name;
+    const getId = e.target.id;
+
+    const fromChecker = getName === "from";
+    const toChecker = getName === "to";
+    
+    if (fromChecker) {
+      const newDestination = {...destination};
+      newDestination[getId] = getValue;
+      setDestination(newDestination);
+    }
+    if (toChecker) {
+      const newDestination = {...destination};
+      newDestination[getId] = getValue;
+      setDestination(newDestination);
+    }
+  }
 
   return (
     <div className="container">
@@ -68,11 +96,11 @@ const Destination = () => {
                 </div>
                 <div className="mb-3">
                   <small>Pick From</small>
-                  <input className="form-control" type="text" placeholder="Dhaka"/>
+                  <input className="form-control" name="from" id="fromDestination" onChange={handleChangeValue} type="text" placeholder="Dhaka"/>
                 </div>
                 <div className="mb-3">
                   <small>Pick To</small>
-                  <input className="form-control" type="text" placeholder="Syhlet"/>
+                  <input className="form-control" name="to" id="toDestination" onChange={handleChangeValue} type="text" placeholder="Syhlet"/>
                 </div>
                 <small>Pick A Date</small>
                 <Calendar
@@ -90,15 +118,15 @@ const Destination = () => {
               <div className="ticket-price p-3 rounded">
                 <div className="choosed-destination mb-3 px-3 py-2 text-white">
                   <ul className="right-destination m-0">
-                    <li className="from-destination">Dhaka</li>
-                    <li className="to-destination">Syhlet</li>
+                    <li className="from-destination">{fromDestination ? fromDestination : "Dhaka"}</li>
+                    <li className="to-destination">{toDestination ? toDestination : "Syhlet"}</li>
                   </ul>
                 </div>
 
                 {/* Ticket Price */}
-                {priceDiv()}
-                {priceDiv()}
-                {priceDiv()}
+                {priceDiv(1)}
+                {priceDiv(2)}
+                {priceDiv(3)}
                 
               </div>
             )
